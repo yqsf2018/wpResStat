@@ -1,7 +1,7 @@
 #!/bin/bash
 # this script must run at the server root
-subdirs=("../logs" "../../cert")
-files=("../../cert/snakeoil.key" "../../cert/snakeoil.crt")
+subdirs=("../logs" "../cert")
+files=("../cert/snakeoil.key" "../cert/snakeoil.crt")
 
 echo "WP Agent Prestart: Check or Create"
 

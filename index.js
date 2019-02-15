@@ -50,8 +50,8 @@ let loadAppCfg = function (appCfg) {
   if (null == appCfg) {
     appCfg = './config/wcsCfg.js';
   }
-  dbg('loadAppCfg(): Using Server Config:', appCfg);
-  let cfgStat = fs.statSync(appCfg);
+  // dbg('loadAppCfg(): Using Server Config:', appCfg);
+  // let cfgStat = fs.statSync(appCfg);
   do {
     /* if (!cfgStat.isFile()){
       err = 'no application config';

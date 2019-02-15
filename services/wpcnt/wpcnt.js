@@ -17,7 +17,7 @@ let cntCache = {};
 const infoTag = ['Count Type', 'Vendor', 'CalledBy', 'RecordDate'];
 
 let updateWpHandle = function (wpSrv, initCB) {
-   let wpSvc = require(wpSrv).cfg;
+   let wpSvc = config.get('wpSvc');
     jwtCli.updateAuthToken(wpSvc.site, wpSvc.user, wpSvc.password
     , function(err, respData){
         if (err) {
