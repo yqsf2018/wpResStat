@@ -1,0 +1,45 @@
+{
+    "srv": {
+        "restful": {
+            "addr": "0.0.0.0"
+            , "port": 3090
+            , "fSecure":true
+            , "cert":{
+                "path":"./cert/"
+                ,"keyfile":"snakeoil.key"
+                ,"certfile":"snakeoil.crt"
+            }
+        }
+        ,"svcSet": {
+            "wpcnt": {  // restful endpoint
+                "routePath":"./routes"
+                ,"svcPath":"./services/wpcnt"
+                ,"setting":{
+                    "updateOption": "ACC"
+                    ,"indexCol":"Day"
+                    ,"ValueCol":"Count"
+                    ,"sumKey":"Total"
+                    ,"lineSep":"\n"
+                    ,"tokenSep":":"
+                }
+                ,"errEnum":{
+                    "ERR_NONE":"None"
+                    ,"ERR_DUPLICATE":"DUPLICATE_POST"
+                    ,"ERR_WP":"WP_ERROR"
+                    ,"ERR_INV_REQ":"INVALID_REQUEST"
+                }
+            }
+        }   /* end of svcSet dict */
+    }
+    ,"logCfg":{
+        "path":"./logs/"
+    }
+    
+    ,"wpSvc": {
+        "site":"https://your.wordpress.com"
+        ,"ep":"https://your.wordpress.com/wp-json"
+        ,"ver":"0.1.1"
+        ,"user":"wp_bot"
+        ,"password":"wp_password"
+    }
+}

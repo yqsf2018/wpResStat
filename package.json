@@ -1,0 +1,27 @@
+{
+  "name": "wpCounter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "prestart": "./scripts/prestart.sh"
+  },
+  "dependencies": {
+    "array-compare": "2.0.0",
+    "async": "2.5.0",
+    "body-parser": "~1.13.2",
+    "config": "~1.21.0",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "jsonwebtoken": "^7.4.3",
+    "method-override": "^2.3.9",
+    "moment-timezone": "^0.5.14",
+    "node-rest-client": "2.0.1",
+    "rsvp": "^4.8.4",
+    "striptags": "^3.1.1",
+    "validator": "~5.4.0",
+    "winston": "~2.2.0",
+    "wordpress-jwt-auth": "^1.1.1",
+    "wpapi": "~1.1.2"
+  }
+}
