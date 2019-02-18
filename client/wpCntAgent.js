@@ -28,8 +28,7 @@ let Client = rest.Client;
 
 let cntInterval = 5;
 let reportRetryMax = 3;
-// let statSvr = 'https://stat.tinoq.com/wpcnt/record';
-let statSvr = 'https://localhost:3090/wpcnt/record';
+let statSvr = "http";
 let numCnt = 0;
 
 let arg_post_req = {
@@ -49,7 +48,7 @@ let arg_post_req = {
 
 let cntrSet ={};
 
-exports.init = function( cb = null, cfgFile = '../config/wcaCfg.js') {
+exports.init = function( cb = null, cfgFile = "../config/wcaCfg.js") {
     /* load configuration */
     let stat = fs.statSync(cfgFile);
     if (!stat.isFile()) {
@@ -58,9 +57,18 @@ exports.init = function( cb = null, cfgFile = '../config/wcaCfg.js') {
     else {
         try {
             let wca = require(cfgFile);
-            cntInterval = wca.cfg.cntInterval;
+            cntInterval = wca.cfg.reportInterval;
             reportRetryMax = wca.cfg.reportRetryMax;
-            dbg('wca.init(): cntInterval=',cntInterval,',reportRetryMax=',reportRetryMax);
+            let srvCfg = wca.cfg.statSrv;
+            if (true == srvCfg.fSSL){
+                statSvr = "https";
+            }
+            else {
+                statSvr = "http";
+            }
+            statSvr += util.format("://%s:%d%s",srvCfg.host,srvCfg.port,srvCfg.cntPath);
+            dbg('wca.init(): cntInterval=',cntInterval,',reportRetryMax=',reportRetryMax,
+                "Restful URL=", statSvr);
             cb(null);
         }
         catch (e) {
@@ -125,7 +133,7 @@ exports.count = function(cntrToken, cb, count = 1, fAcc = true, dateStr = null) 
         err:null
         ,curCnt:0
     }
-    dbg('count():', cntrToken, count, fAcc, dateStr);
+    dbg('count():', count, fAcc, dateStr);
     if (!(cntrToken in cntrSet)) {
         ret.err = 'Non-exist counter';
         if (cb) {    
@@ -138,15 +146,13 @@ exports.count = function(cntrToken, cb, count = 1, fAcc = true, dateStr = null) 
         
         if(true == fAcc) {
             cntr.total += count;
-            cntr.numCnt++;
             if (cntr.numCnt < cntInterval) {
+                cntr.numCnt++;
                 cb(null, cntr.total, cntr.numCnt);
                 return;
             }
             else {
                 cntr.countData = cntr.total;
-                // cntr.numCnt = 0;
-                // cntr.total = 0;
             }
         }
         else {
