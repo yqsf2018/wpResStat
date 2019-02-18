@@ -5,8 +5,8 @@ exports.cfg = {
     ,"reportRetryMax": 2
     /* info of the restful interface of stat server */
     ,"statSrv":{
-        "host":"internal6.tinoq.com"
-        ,"port":3020
+        "host":"restful.sample.com"
+        ,"port":10000
         ,"cntPath":"/wpcnt/record"
         ,"fSSL":true
     }
